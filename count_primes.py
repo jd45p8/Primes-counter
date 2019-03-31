@@ -1,5 +1,7 @@
 from count_multiples import count_multiples_up_to as cm_up_to
 from count_multiples import count_common_multiples_up_to as ccm_up_to
+from find_primes import find_primes as fp
+
 from math import sqrt,ceil
 
 # Cuenta los primos que hay desde 1 hasta n
