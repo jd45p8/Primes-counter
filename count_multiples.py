@@ -4,4 +4,7 @@ def count_multiples_up_to(a,n):
 
 # Cuenta los mútiplos comunes de a y b hasta n
 def count_common_multiples_up_to(a,b,n):
-    return count_multiples_up_to(a*b,n)
+    if (a != b):
+        return count_multiples_up_to(a*b,n)
+    else:
+        return count_multiples_up_to(a,n)

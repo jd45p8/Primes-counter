@@ -30,12 +30,10 @@ def find_primes(potencia):
         else:
             primes.append(prime)
     
-    j = prime
+    j = prime - 1
     while j < n:
         j = j+1
-        if vec[j-1] != 0:
-            pass
-        else:
+        if not (vec[j-1] != 0):
             primes.append(j)
     return primes
     #print('There is: ' + str(n - vec.count_nonzero()))
