@@ -4,8 +4,9 @@ import numpy as np
 from math import sqrt
 
 
-def find_primes(potencia):
-    n = pow(10,potencia)
+def find_primes(n):
+    if n <= 1:
+        return []
     vec = sp.lil_matrix((n,1), dtype=np.int8)
 
     vec[0] = 1
@@ -22,7 +23,7 @@ def find_primes(potencia):
         
         # Hallar el último primo verificado
         prime += 1
-        while vec[prime - 1] != 0 and prime <= limit:
+        while prime <= limit and vec[prime - 1] != 0:
             prime += 1
 
         if prime > limit:
