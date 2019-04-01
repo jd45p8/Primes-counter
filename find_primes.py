@@ -1,7 +1,7 @@
 import scipy.sparse as sp
 import numpy as np
 
-from math import sqrt
+from math import sqrt,ceil
 
 
 def find_primes(n):
@@ -12,7 +12,7 @@ def find_primes(n):
     vec[0] = 1
     primes = [2]
     prime = 2
-    limit = sqrt(n)
+    limit = ceil(sqrt(n))
 
     while True:
         j = prime*2
