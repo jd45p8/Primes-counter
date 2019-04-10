@@ -7,6 +7,7 @@ def next_binary_vector(n,a,vec,less_sig_bit,first):
         vec = [0]*n
         vec[n-a:n] = [1]*a        
         if n == a:
+            last = True
             return vec,less_sig_bit,last
         else:
             return vec,less_sig_bit,last   
@@ -43,7 +44,7 @@ def next_binary_vector_with_static_s(n,a,s,vec,less_sig_bit,first):
     else:
         del vec[s]        
     
-    vec,less_sig_bit,last = next_binary_vector(n-1,a-1,vec,less_sig_bit,first)
+    vec, less_sig_bit, last = next_binary_vector(n-1, a-1, vec, less_sig_bit, first)
     vec.insert(s,1)
     return vec,less_sig_bit,last
 
