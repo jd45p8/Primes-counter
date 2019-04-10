@@ -38,9 +38,13 @@ def next_binary_vector(n,a,vec,less_sig_bit,first):
             return vec,less_sig_bit,last
 
 def next_binary_vector_with_static_s(n,a,s,vec,less_sig_bit,first):
-    vec,less_sig_bit,last = next_binary_vector(n,a,vec,less_sig_bit,first)
+    if first:
+        less_sig_bit -= 1
+    else:
+        del vec[s]        
     
-
+    vec,less_sig_bit,last = next_binary_vector(n-1,a-1,vec,less_sig_bit,first)
+    vec.insert(s,1)
     return vec,less_sig_bit,last
 
 
