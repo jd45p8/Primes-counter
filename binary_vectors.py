@@ -1,12 +1,16 @@
-n = 6
-a = 2
+# Determina el sigiente vector binario de tamaño n que resulta al mover hacia la
+# el bit menos significativo del array vec de tamaño n y con a bits en 1
+# first es verdadero si es la primera iteración, las es verdadero si es la última
+def next_binary_vector(n,a,vec,less_sig_bit,first):
+    last = False
+    if(first):    
+        vec = [0]*n
+        vec[n-a:n] = [1]*a        
+        if n == a:
+            return vec,less_sig_bit,last
+        else:
+            return vec,less_sig_bit,last   
 
-vec = [0]*n
-
-less_sig_bit = n-1
-vec[n-a:n] = [1]*a
-print(vec)
-while less_sig_bit > a - 1:
     i = less_sig_bit - 1
     shipment = 1
 
@@ -27,7 +31,17 @@ while less_sig_bit > a - 1:
             vec[less_sig_bit] = 0
             less_sig_bit -= 1
     
-        print(vec)
+        if less_sig_bit <= a - 1:
+            last = True
+            return vec,less_sig_bit,last
+        else:
+            return vec,less_sig_bit,last
+
+def next_binary_vector_with_static_s(n,a,s,vec,less_sig_bit,first):
+    vec,less_sig_bit,last = next_binary_vector(n,a,vec,less_sig_bit,first)
+    
+
+    return vec,less_sig_bit,last
 
 
     
