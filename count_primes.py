@@ -20,7 +20,7 @@ def count_primes_up_to(n):
         # Se quitan los múltiplos comunes entre 2 primos para evitar la sobre eliminación de no primos
         for a in range(2, i+2):
             vec = []
-            less_sig_bit = len(v_primes)-1
+            less_sig_bit = i
             first = True
             last = False
 
