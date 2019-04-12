@@ -28,16 +28,21 @@ def count_primes_up_to(n):
                     first = False
 
                 product = 1
-                k = 0
-                while k <= i:
-                    if vec[k] == 1:
-                        product *= v_primes[k]
-                    k += 1
+                j = 0
+                while j <= i:
+                    if vec[j] == 1:
+                        product *= v_primes[j]
+                    j += 1
                 if product > 1:
+
                     if a%2 == 0:
                         not_primes -= cm_up_to(product, n)
                     else:
                         not_primes += cm_up_to(product, n)
+
+            # Si el ultimo producto es mayor que n significa que los próximos también lo serán
+            if product > n:
+                break
         
         primes -= not_primes
 
