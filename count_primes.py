@@ -1,5 +1,4 @@
 from count_multiples import count_multiples_up_to as cm_up_to
-from count_multiples import count_common_multiples_up_to as ccm_up_to
 from binary_vectors import next_binary_vector_with_static_s
 from find_primes import find_primes as fp
 from math import sqrt, ceil
@@ -17,11 +16,7 @@ def count_primes_up_to(n):
     for i in range(0, len(v_primes)):
         not_primes = cm_up_to(v_primes[i], n) - 1
 
-        # Se quitan los múltiplos comunes entre 2 primos para evitar la sobre eliminación de no primos
-        for j in range(0, i):
-            not_primes -= ccm_up_to(v_primes[i], v_primes[j], n)
-
-        for a in range(3,i+2):
+        for a in range(2,i+2):
             vec = []
             less_sig_bit = i
             first = True
@@ -39,7 +34,10 @@ def count_primes_up_to(n):
                         product *= v_primes[k]
                     k += 1
                 if product > 1:
-                    not_primes += cm_up_to(product, n)
+                    if a%2 == 0:
+                        not_primes -= cm_up_to(product, n)
+                    else:
+                        not_primes += cm_up_to(product, n)
         
         primes -= not_primes
 
