@@ -11,39 +11,32 @@ def count_primes_up_to(n):
     
     # Primos menores o iguales a la raíz de n para verificar la primalidad de los número desde 1 hasta n
     v_primes = fp(ceil(sqrt(n)))
+    v_primes_count = len(v_primes)
 
     # Se descartan como primos todos los múltiplos de los primos menores o iguales que la raiz del n
-    for i in range(0, len(v_primes)):
-        not_primes = cm_up_to(v_primes[i], n) - 1
-
-        for a in range(2,i+2):
-            vec = []
-            less_sig_bit = i
-            first = True
-            last = False
-
-            while last is False:
-                vec, less_sig_bit, last = next_binary_vector_with_static_s(i+1, a, i, vec, less_sig_bit, first)
-                if first:
-                    first = False
-
-                product = 1
-                j = 0
-                while j <= i:
-                    if vec[j] == 1:
-                        product *= v_primes[j]
-                    j += 1
-                if product > 1:
-
-                    if a%2 == 0:
-                        not_primes -= cm_up_to(product, n)
-                    else:
-                        not_primes += cm_up_to(product, n)
-
-            # Si el ultimo producto es mayor que n significa que los próximos también lo serán
-            if product > n:
-                break
+    not_primes = 0
+    i = 0
+    product = 1
+    while product < n and i < v_primes_count:
+        vec = []
+        for j in range(0,i+1):
+            vec.append(j-1)
         
-        primes -= not_primes
+        while product < n and vec[i] < v_primes_count - 1:
+            product = 1
+            for j in range(0,i+1):
+                vec[j] += 1
+                product *= v_primes[vec[j]]
+                
+                if (i+1)%2 is not 0:
+                    not_primes += cm_up_to(product,n)
+                    if (i+1) is 1:
+                        not_primes -= 1
+                else:
+                    not_primes -= cm_up_to(product,n)
+        
+        i = i+1
+        
+    primes -= not_primes
 
     return primes
