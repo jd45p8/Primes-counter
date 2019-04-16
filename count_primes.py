@@ -19,43 +19,47 @@ def count_primes_up_to(n):
     while  not too_big and i < v_primes_count:
         # Se genera el primer vector de tamaño i+1 para
         too_big = True
-        product = 1
         vec = []
+        prod = []
         for j in range(0,i+1):
             vec.append(j)
-            product *= v_primes[vec[j]]
+            if j > 0:
+                prod.append(prod[j-1]*v_primes[vec[j]])
+            else:
+                prod.append(v_primes[vec[j]])
 
         if (i + 1) % 2 is not 0:
-            not_primes += cm_up_to(product, n)
+            not_primes += cm_up_to(prod[i], n)
             if (i + 1) is 1:
                 not_primes -= 1
         else:
-            not_primes -= cm_up_to(product, n)
+            not_primes -= cm_up_to(prod[i], n)
 
 
         while vec[0] < v_primes_count-i-1:
-            product = 1
             j = i
             while j > 0 and vec[j] == v_primes_count - (i - j) - 1:
                 j -= 1
 
             vec[j] += 1
+            if j > 0:
+                prod[j] = v_primes[vec[j]]*prod[j-1]
+            else:
+                prod[j] = v_primes[vec[j]]
+
             for k in range(1, i - j + 1):
                 vec[j + k] = vec[j] + k
-                product *= v_primes[vec[j+k]]
-
-            for k in range(0,j+1):
-                product *= v_primes[vec[k]]
+                prod[j + k] = prod[j + k - 1]*v_primes[vec[j + k]]
                 
             if (i+1)%2 is not 0:
-                not_primes += cm_up_to(product,n)
+                not_primes += cm_up_to(prod[i],n)
                 if (i+1) is 1:
                     not_primes -= 1
             else:
-                not_primes -= cm_up_to(product,n)
+                not_primes -= cm_up_to(prod[i],n)
 
             if too_big:
-                if product < n:
+                if prod[i] < n:
                     too_big = False
         
         i = i+1
